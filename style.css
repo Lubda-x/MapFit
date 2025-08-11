@@ -1,0 +1,12 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+#map{
+    /* background-color: red; */
+    height: 600px;
+}
