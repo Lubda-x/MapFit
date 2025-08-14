@@ -10,3 +10,38 @@
     /* background-color: red; */
     height: 600px;
 }
+
+
+.container{
+    /* position: absolute; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.search{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    display: grid;
+    position: absolute;
+    z-index: 400;
+    justify-content: center;
+    margin-top: -1200px;
+}
+.search-location-input{
+    position: absolute;
+    
+    min-width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+
+.search-button{
+    margin-left: 430px;
+    position: absolute;
+}
