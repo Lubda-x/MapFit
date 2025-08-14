@@ -12,7 +12,7 @@ let searchButton = document.querySelector(".search-button")
 
 let map = L.map('map', {
     zoomControl: false,       // hides the + / - buttons
-    // scrollWheelZoom: false,   // disables zoom with mouse wheel
+    scrollWheelZoom: false,   // disables zoom with mouse wheel
     doubleClickZoom: false,   // disables zoom on double click
     touchZoom: false  
             // disables pinch zoom on touchscreens
@@ -28,20 +28,49 @@ let map = L.map('map', {
 //     .openPopup();
 
 
+
 map.locate({ setView: true, maxZoom: 19 });
 
-        map.on('locationfound', function(e) {
-            L.marker(e.latlng).addTo(map)
-                .bindPopup("You are here 📍")
-                .openPopup();
-            L.circle(e.latlng, e.accuracy).addTo(map);
-        });
+function getMyLocation(e){
 
-        map.on('locationerror', function() {
-            alert("Location access denied or unavailable.");
-        });
+    // The code below gets the users current position
+    L.marker(e.latlng).addTo(map)
+    .bindPopup("You are here 📍")
+        .openPopup();
+    // L.circle(e.latlng, e.accuracy).addTo(map);
+    let yourCurrentLocation = e.latlng
 
-console.log(myLocation)
+    
+    
+    // It is the code below that shows the red line(routing machine stuff...)
+    L.Routing.control({
+    waypoints: [
+        L.latLng(yourCurrentLocation.lat,yourCurrentLocation.lng), // Start: AFIT Main Gate
+        L.latLng(10.60991566108269, 7.441094861908177)  // End: Some building in AFIT
+    ],
+        routeWhileDragging: true
+    }).addTo(map);
+
+
+
+    //The code below resets the zoom level caused by the routing machine.
+    map.setMinZoom(19);
+    map.setMaxZoom(19);
+
+    
+
+}
+
+map.on('locationfound', getMyLocation)
+
+
+console.log(getMyLocation())
+
+map.on('locationerror', function() {
+    alert("Location access denied or unavailable.");
+});
+
+
 
 // THis block of code removes the zoom in button
 let zoomInOut = document.querySelector('.leaflet-top')
@@ -52,14 +81,6 @@ zoomInOut.style.display = 'none'
 
 
 
-// It is the code below that shows the red line(routing machine stuff...)
-// L.Routing.control({
-//     waypoints: [
-//         L.latLng(10.6081277,7.4391133), // Start: AFIT Main Gate
-//         L.latLng(10.609877148454233, 7.441088525045217)  // End: Some building in AFIT
-//     ],
-//     routeWhileDragging: true
-// }).addTo(map);
 
 
 
@@ -84,6 +105,10 @@ searchButton.addEventListener('click', e=>{
     console.log(searchInput.value)
     
 })
+
+
+
+
 
 
 
