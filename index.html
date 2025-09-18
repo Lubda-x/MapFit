@@ -20,16 +20,18 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
 
 
-    
+
+
 
 
 
     
 </head>
 <body>
-    <header>MapFit is kinda cool</header>
+    <!-- <header>MapFit is kinda cool</header> -->
     <div id="map"></div>
     
     <div class="container">
@@ -41,13 +43,16 @@
             <input class="search-location-input" type="text">
             <button class="search-button">Search</button>
         </div>
-    </div>
 
+        
+    </div>  
 
+    <canvas id="riveCanvas"></canvas>
 
 </body>
    
-    <script src="./Libraries/SimpleSearch.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas"></script>
+    <!-- <script src="./Libraries/SimpleSearch.js"></script> -->
     <script type="module" src="main.js"></script>
 
 

@@ -9,12 +9,14 @@
 #map{
     /* background-color: red; */
     height: 600px;
+    display: none;
 }
 
 
 .container{
     /* position: absolute; */
-    display: flex;
+    display: none;
+    /* display: flex; */
     align-items: center;
     justify-content: center;
 }
@@ -45,3 +47,11 @@
     margin-left: 430px;
     position: absolute;
 }
+
+#riveCanvas{
+    background-color: red;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
