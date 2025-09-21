@@ -12,12 +12,13 @@ const r = new rive.Rive({
     canvas: document.getElementById('riveCanvas'),
     // layout: layout,
     autoplay: true,
+    autoBind: true,
     animations: ["Welcome animate",
          "MpaFit Text animation",   
             `"To"`,
             "pin",
             "Lines",
-            "Button"        
+            "Button"         
     ],
     stateMachines: "State Machine 1",
 
