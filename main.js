@@ -14,7 +14,7 @@ let mapView = document.querySelector('#map')
 
 let inMap = document.querySelector('.inMap')
 
-let errorScreen = document.querySelector('.error-content')
+let errorScreen = document.querySelector('.error-screen')
 
 
 
@@ -49,6 +49,10 @@ function onboardAnimation(){
                 inMap.style.display = 'initial'
                 
                 riveCanvas.style.display = 'none'
+
+                setTimeout(()=>{
+                    window.location.reload();
+                }, 300)
 
             }
 
