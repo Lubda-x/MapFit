@@ -13,6 +13,7 @@ let inMap = document.querySelector('.inMap')
 let errorScreen = document.querySelector('.error-screen')
 
 let body = document.querySelector('body')
+let bodyHTML = document.querySelector('html')
 
 
 
@@ -97,9 +98,8 @@ if (localStorage.getItem(firstVisitKey) === null) {
 } else {
     // === RETURNING VISITOR ===
     inMap.style.display = 'initial'
-    
     riveCanvas.style.display = 'none'
-
+    bodyHTML.style.overflowY = 'hidden'
     navigatorFuntionality();
     console.log("Welcome back!");
 

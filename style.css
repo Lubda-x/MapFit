@@ -9,6 +9,7 @@
 
 
 html, body {
+  
   overflow-x: hidden;     /* No horizontal scroll at all */
   overscroll-behavior-x: none; /* Prevent horizontal “pull to refresh” or bounce */
 }
@@ -23,33 +24,6 @@ html, body {
     /* display: none; */
 }
 
-
-
-.search{
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    display: grid;
-    position: absolute;
-    z-index: 400;
-    justify-content: center;
-    margin-top: -1200px;
-}
-.search-location-input{
-    position: absolute;
-    
-    min-width: 400px;
-    height: 40px;
-    border-radius: 20px;
-    padding-left: 20px;
-    font-size: 20px;
-}
-
-
-.search-button{
-    margin-left: 430px;
-    position: absolute;
-}
 
 #riveCanvas{
     background-color: #00CA83;
