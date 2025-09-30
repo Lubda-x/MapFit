@@ -99,6 +99,8 @@ if (localStorage.getItem(firstVisitKey) === null) {
     inMap.style.display = 'initial'
     
     riveCanvas.style.display = 'none'
+
+    navigatorFuntionality();
     console.log("Welcome back!");
 
     
@@ -127,69 +129,74 @@ let map = L.map('map', {
 //   L.marker([10.6081277,7.4391133]).addTo(map)
 //     .bindPopup('Yo! AFIT.')
 //     .openPopup();
-var marker;
 
-if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(
-        function (position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
 
-            // If marker doesn't exist, create it
-            if (!marker) {
-                marker = L.marker([lat, lng]).addTo(map)
-                    .bindPopup("You are here 📍").openPopup();
-                map.setView([lat, lng], 19); // zoom to location
-                // The code below is to detect if the user is outsied AFIT
-                const userPoint = turf.point([lat, lng]);
-                const campusPoly = turf.polygon([[
-                [10.60809, 7.43827],
-                [10.6058, 7.44575],
-                [10.61398, 7.45975],
-                [10.62093, 7.44612],
-                [10.61518, 7.43693],
-                [10.60809, 7.43827]
-                ]]);
+function navigatorFuntionality(){
 
-                if (turf.booleanPointInPolygon(userPoint, campusPoly)) {
-                    console.log("User is inside AFIT");
-                    inMap.style.display = 'initial'
-                    body.style.background = '#ffffffff'
+
+    var marker;
+
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(
+            function (position) {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+
+                // If marker doesn't exist, create it
+                if (!marker) {
+                    marker = L.marker([lat, lng]).addTo(map)
+                        .bindPopup("You are here 📍").openPopup();
+                    map.setView([lat, lng], 19); // zoom to location
+                    // The code below is to detect if the user is outsied AFIT
+                    const userPoint = turf.point([lat, lng]);
+                    const campusPoly = turf.polygon([[
+                    [10.60809, 7.43827],
+                    [10.6058, 7.44575],
+                    [10.61398, 7.45975],
+                    [10.62093, 7.44612],
+                    [10.61518, 7.43693],
+                    [10.60809, 7.43827]
+                    ]]);
+
+                    if (turf.booleanPointInPolygon(userPoint, campusPoly)) {
+                        console.log("User is inside AFIT");
+                        inMap.style.display = 'initial'
+                        body.style.background = '#ffffffff'
+                    } else {
+                        console.log("User is outside AFIT");
+                        inMap.style.display = 'none'
+                        errorScreen.style.display = 'initial'
+                        body.style.background = '#FF5900'
+
+
+                    }
+
+
                 } else {
-                    console.log("User is outside AFIT");
-                    inMap.style.display = 'none'
-                    errorScreen.style.display = 'initial'
-                    body.style.background = '#FF5900'
-
-
+                    marker.setLatLng([lat, lng]); // move marker
+                    map.setView([lat, lng], 19)
                 }
 
-
-            } else {
-                marker.setLatLng([lat, lng]); // move marker
-                map.setView([lat, lng], 19)
+            },
+            function (error) {
+                alert("Unable to retrieve location");
+            },
+            {
+                enableHighAccuracy: true, // use GPS if available
+                maximumAge: 0
             }
+            
+        );
+    } else {
+        alert("Geolocation is not supported by your browser.");
 
-        },
-        function (error) {
-            alert("Unable to retrieve location");
-        },
-        {
-            enableHighAccuracy: true, // use GPS if available
-            maximumAge: 0
-        }
         
-    );
-} else {
-    alert("Geolocation is not supported by your browser.");
-
-    
 
 
+
+    }
 
 }
-
-
 
 
 
