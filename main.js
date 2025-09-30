@@ -157,7 +157,7 @@ if (navigator.geolocation) {
                 } else {
                     console.log("User is outside AFIT");
                     inMap.style.display = 'none'
-                    errorScreen.style.display = 'inline-block'
+                    errorScreen.style.display = 'initial'
 
 
                 }
