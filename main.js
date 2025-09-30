@@ -4,49 +4,108 @@
 let searchInput = document.querySelector(".search-location-input")
 let searchButton = document.querySelector(".search-button")
 
+let riveCanvas = document.querySelector("#riveCanvas")
 
 
+let reloadButton = document.querySelector('.reload-button')
 
-const r = new rive.Rive({
-    src: 'mapfit.riv',
-    canvas: document.getElementById('riveCanvas'),
-    // layout: layout,
-    autoplay: true,
-    autoBind: true,
-    animations: ["Welcome animate",
-         "MpaFit Text animation",   
-            `"To"`,
-            "pin",
-            "Lines",
-            "Button"         
-    ],
-    stateMachines: "State Machine 1",
 
-    onLoad: () => {
-      computeSize();
-    },
+let mapView = document.querySelector('#map')
 
-});
+let inMap = document.querySelector('.inMap')
+
+let errorScreen = document.querySelector('.error-content')
 
 
 
 
-function computeSize() {
-    r.resizeDrawingSurfaceToCanvas();
-  }
 
 
 
-// Subscribe to window size changes and update call `resizeDrawingSurfaceToCanvas`
-window.onresize = computeSize;
+function onboardAnimation(){
 
-// Subscribe to devicePixelRatio changes and call `resizeDrawingSurfaceToCanvas`
-window
-.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`)
-.addEventListener("change", computeSize);
+    const r = new rive.Rive({
+        src: 'mapfit.riv',
+        canvas: document.getElementById('riveCanvas'),
+        // layout: layout,
+        autoplay: true,
+        autoBind: true,
+        animations: ["Welcome animate",
+            "MpaFit Text animation",   
+                `"To"`,
+                "pin",
+                "Lines",
+                "Button"         
+        ],
+        stateMachines: "State Machine 1",
 
-// Update the layout
-r.layout = new rive.Layout({ fit: rive.Fit.Layout });
+        onLoad: () => {
+            let vmi = r.viewModelInstance
+            let trigProp = vmi.trigger('Clear_trig');
+
+
+
+            function sayHello(){
+                inMap.style.display = 'initial'
+                
+                riveCanvas.style.display = 'none'
+
+            }
+
+            trigProp.on(sayHello)
+            computeSize();
+        },
+
+    });
+
+    function computeSize() {
+        r.resizeDrawingSurfaceToCanvas();
+    }
+
+
+
+    // Subscribe to window size changes and update call `resizeDrawingSurfaceToCanvas`
+    window.onresize = computeSize;
+
+    // Subscribe to devicePixelRatio changes and call `resizeDrawingSurfaceToCanvas`
+    window
+    .matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`)
+    .addEventListener("change", computeSize);
+
+    // Update the layout
+    r.layout = new rive.Layout({ fit: rive.Fit.Layout });
+
+}
+
+
+
+const firstVisitKey = 'hasVisited';
+
+// 1. Check if the key exists
+if (localStorage.getItem(firstVisitKey) === null) {
+    // === FIRST TIME VISITOR ===
+    console.log("Welcome! This is your first visit.");
+
+    inMap.style.display = 'none'
+    
+    onboardAnimation();
+    // Perform first-time actions here (e.g., show a welcome modal)
+    
+    // 2. Set the flag so the script won't run this block again
+    localStorage.setItem(firstVisitKey, 'true');
+    
+} else {
+    // === RETURNING VISITOR ===
+    inMap.style.display = 'initial'
+    
+    riveCanvas.style.display = 'none'
+    console.log("Welcome back!");
+
+    
+    
+    // Perform returning user actions here
+}
+
 
 
 
@@ -62,6 +121,8 @@ let map = L.map('map', {
       maxZoom: 19,
       attribution: '© OpenStreetMap'
   }).addTo(map);
+
+
 
 //   L.marker([10.6081277,7.4391133]).addTo(map)
 //     .bindPopup('Yo! AFIT.')
@@ -79,9 +140,6 @@ if (navigator.geolocation) {
                 marker = L.marker([lat, lng]).addTo(map)
                     .bindPopup("You are here 📍").openPopup();
                 map.setView([lat, lng], 19); // zoom to location
-
-
-
                 // The code below is to detect if the user is outsied AFIT
                 const userPoint = turf.point([lat, lng]);
                 const campusPoly = turf.polygon([[
@@ -94,9 +152,14 @@ if (navigator.geolocation) {
                 ]]);
 
                 if (turf.booleanPointInPolygon(userPoint, campusPoly)) {
-                console.log("User is inside AFIT");
+                    console.log("User is inside AFIT");
+                    map.style.display = 'initial'
                 } else {
-                console.log("User is outside AFIT");
+                    console.log("User is outside AFIT");
+                    inMap.style.display = 'none'
+                    errorScreen.style.display = 'initial'
+
+
                 }
 
 
@@ -149,6 +212,10 @@ attributionWaterMark.style.display = 'none';
 
 
 
+
+reloadButton.addEventListener('click', e=>{
+    window.location.reload();
+})
 
 
 

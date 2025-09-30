@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#00CA83">
-    <meta name="theme-color" content="#008f5dff" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#005f3eff" media="(prefers-color-scheme: dark)">
     <title>MapFit</title>
     <link rel="stylesheet" href="style.css">
 
@@ -34,20 +34,26 @@
 </head>
 <body>
     <!-- <header>MapFit is kinda cool</header> -->
-    <div id="map"></div>
+    <div class="inMap" style="display: initial">
+
+        <div id="map"></div>
     
-    <div class="container">
+    </div>
 
-        
+    
 
-        <div class="search">
 
-            <input class="search-location-input" type="text">
-            <button class="search-button">Search</button>
+
+    <div class="error-screen">
+        <img src="Assets/broken_mapimage.png" alt="" class="broken-map">
+        <div class="error-content">
+            <h1>Omo! 🤧</h1>
+            <p>Looks like you are not within AFIT. Reload page or change your location.</p>
+            <button class="reload-button">Reload</button>
         </div>
-
         
-    </div>  
+    </div>
+    
 
     <canvas id="riveCanvas"></canvas>
 

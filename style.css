@@ -6,20 +6,22 @@
     font-style: normal;
 }
 
+
+
+html, body {
+  overflow-x: hidden;     /* No horizontal scroll at all */
+  overscroll-behavior-x: none; /* Prevent horizontal “pull to refresh” or bounce */
+}
+
+
+
+
 #map{
     /* background-color: red; */
     height: 600px;
-    display: none;
+    /* display: none; */
 }
 
-
-.container{
-    /* position: absolute; */
-    display: none;
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
-}
 
 
 .search{
@@ -55,3 +57,63 @@
     height: 100vh;
 }
 
+
+
+
+
+
+
+
+.error-screen{
+    display: none;
+    /* display: inline-block; */
+    gap: 200px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #FF5900
+    
+
+}
+
+
+.error-screen h1, p{
+    color: white;
+
+}
+
+.error-screen p{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.error-screen h1{
+    font-weight: 700;
+    
+}
+
+
+
+
+.error-content{
+    position: absolute;
+    bottom: 30px;
+    margin-left: 50px;
+}
+
+
+.error-screen .reload-button{
+    width: 100px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+
+.broken-map{
+
+    opacity: 70%;
+    width: 400px;
+}
