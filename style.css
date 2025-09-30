@@ -67,7 +67,7 @@ html, body {
 
 .error-screen{
     position: absolute;
-    display: none;
+    /* display: none; */
     /* display: inline-block; */
     gap: 200px;
     width: 100vw;
@@ -99,7 +99,7 @@ html, body {
 .error-content{
     position: absolute;
     bottom: 30px;
-    margin-left: 10px;
+    margin-left: 510px;
 }
 
 
