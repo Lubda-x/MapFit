@@ -66,7 +66,7 @@ html, body {
 
 
 .error-screen{
-    display: none;
+    /* display: none; */
     /* display: inline-block; */
     gap: 200px;
     width: 100vw;

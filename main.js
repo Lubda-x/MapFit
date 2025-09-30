@@ -8,12 +8,8 @@ let riveCanvas = document.querySelector("#riveCanvas")
 
 
 let reloadButton = document.querySelector('.reload-button')
-
-
 let mapView = document.querySelector('#map')
-
 let inMap = document.querySelector('.inMap')
-
 let errorScreen = document.querySelector('.error-screen')
 
 
@@ -161,7 +157,7 @@ if (navigator.geolocation) {
                 } else {
                     console.log("User is outside AFIT");
                     inMap.style.display = 'none'
-                    errorScreen.style.display = ''
+                    errorScreen.style.display = 'inline-block'
 
 
                 }
