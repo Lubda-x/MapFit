@@ -12,7 +12,7 @@ let mapView = document.querySelector('#map')
 let inMap = document.querySelector('.inMap')
 let errorScreen = document.querySelector('.error-screen')
 
-
+let body = document.querySelector('body')
 
 
 
@@ -153,11 +153,13 @@ if (navigator.geolocation) {
 
                 if (turf.booleanPointInPolygon(userPoint, campusPoly)) {
                     console.log("User is inside AFIT");
-                    map.style.display = 'initial'
+                    inMap.style.display = 'initial'
+                    body.style.background = '#ffffffff'
                 } else {
                     console.log("User is outside AFIT");
                     inMap.style.display = 'none'
                     errorScreen.style.display = 'initial'
+                    body.style.background = '#FF5900'
 
 
                 }
