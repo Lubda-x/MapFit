@@ -117,15 +117,22 @@ let map = L.map('map', {
     doubleClickZoom: false,   // disables zoom on double click
     touchZoom: false  
             // disables pinch zoom on touchscreens
-}).setView([10.6081277,7.4391133], 19); // AFIT location
+}).setView([10.6081277,7.4391133], 18); // AFIT location
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
+      maxZoom: 18,
       attribution: '© OpenStreetMap'
   }).addTo(map);
 
 
 
+const imageBounds = [[10.607239, 7.438699], [10.615459, 7.456133]];
+
+
+ L.imageOverlay('Assets/Frame 1.svg', imageBounds, {
+    opacity: 1,
+    
+    interactive: true}).addTo(map);
 //   L.marker([10.6081277,7.4391133]).addTo(map)
 //     .bindPopup('Yo! AFIT.')
 //     .openPopup();
